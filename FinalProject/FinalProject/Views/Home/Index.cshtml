@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+}
+@model List<Product>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<style>
+    body {
+        padding: 20px 20px;
+    }
+
+    .results h5[visible='false'],
+    .no-result {
+        display: none;
+    }
+
+    .results h5[visible='true'] {
+        display: table-row;
+    }
+
+    .counter {
+        padding: 8px;
+        color: #ccc;
+    }
+</style>
+
+<div class="form-group pull-right">
+    <input type="text" class="search form-control" placeholder="Ara...">
+</div>
+<span class="counter pull-right"></span>
+<br />
+<br />
+<br />
+<div class="container">
+    
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-3 results">
+                <div class="card">
+                    <img src=@item.ProductUrl class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.ProductName</h5>
+                        <a asp-action="AddToList" asp-route-id=@item.ProductId class="btn btn-primary">Listeye ekle</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $(".search").keyup(function () {
+            var searchTerm = $(".search").val();
+            var listItem = $('.results div').children('h5');
+            var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+            $.extend($.expr[':'], {
+                'containsi': function (elem, i, match, array) {
+                    return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+                }
+            });
+
+            $(".results div h5").not(":containsi('" + searchSplit + "')").each(function (e) {
+                $(this).attr('visible', 'false');
+            });
+
+            $(".results div h5:containsi('" + searchSplit + "')").each(function (e) {
+                $(this).attr('visible', 'true');
+            });
+
+            var jobCount = $('.results div h5[visible="true"]').length;
+            $('.counter').text(jobCount + ' item bulundu');
+
+            if (jobCount == '0') { $('.no-result').show(); }
+            else { $('.no-result').hide(); }
+        });
+    });
+</script>

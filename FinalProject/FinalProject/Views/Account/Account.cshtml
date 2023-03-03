@@ -1,0 +1,86 @@
+﻿@model FinalProject.Models.Login
+
+@{
+    
+    Layout = null;
+
+    ViewData["Title"] = "Account";
+}
+@*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FinalProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FinalProject.styles.css" asp-append-version="true" />
+</head>*@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Üye Ol</title>
+	<style>
+		form {
+			margin: 50px auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			width: 400px;
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+
+		input[type="submit"] {
+			background-color: #4CAF50;
+			border: none;
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+
+<h1>Account</h1>
+
+<h4>Login</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Account">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="EPosta" class="control-label"></label>
+				<input asp-for="EPosta" class="form-control" /><br><br>
+                <span asp-validation-for="EPosta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sifre" class="control-label"></label>
+				<input type="password" asp-for="Sifre" class="form-control" /><br><br>
+                <span asp-validation-for="Sifre" class="text-danger"></span>
+            </div>
+            <div class="text-danger">
+                @ViewBag.Message     
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Giriş Yap" class="btn btn-primary" />
+				<a type="submit" asp-action="SignUp" class="btn btn-primary">Kaydol</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+</html>

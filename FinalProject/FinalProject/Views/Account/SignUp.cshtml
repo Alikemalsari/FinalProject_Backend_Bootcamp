@@ -1,0 +1,53 @@
+﻿@model SignUpViewModel
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Üye Ol</title>
+	<style>
+		form {
+			margin: 50px auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			width: 400px;
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+
+		input[type="submit"] {
+			background-color: #4CAF50;
+			border: none;
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<form asp-action="SignUp">
+		<h2>Üye Ol</h2>
+		<label for="ad">Ad Soyad:</label>
+		<input type="text" id="ad" asp-for="UsernameSurname" required><br><br>
+		<span asp-validation-for="UsernameSurname" class="text-danger"></span>
+
+		<label for="email">E-posta Adresi:</label>
+		<input type="email" id="email" asp-for="Eposta" required><br><br>
+		<span asp-validation-for="Eposta" class="text-danger"></span>
+
+		<label for="sifre">Şifre:</label>
+		<input type="password" id="sifre" asp-for="Password" minlength="8" required><br><br>
+		<span asp-validation-for="Password" class="text-danger"></span>
+
+		<label for="sifre_tekrar">Şifre (Tekrar):</label>
+		<input type="password" id="sifre_tekrar" asp-for="PasswordAgain" minlength="8" required><br><br>
+		<span asp-validation-for="PasswordAgain" class="text-danger"></span>
+
+		<input type="submit" value="Üyeliği Tamamla">
+	</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿@model AddToListAndCategoryViewModel
+
+<form asp-action="AddToList">
+
+    
+    <div class="mb-3">
+        <label class="form-label">Ürün Adı</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="productName" value=@Model.productName >
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Adet</label>
+        <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="quantity" value=@Model.quantity>
+
+    </div>
+
+    
+    <h2>Eklemek İstediğiniz Listeyi Seçiniz</h2>
+
+    @foreach (var item in Model.List)
+    {
+        <button type="submit" class="btn btn-primary" asp-route-id=@item.ListId>
+            @item.ListName
+        </button>
+    }
+   
+</form>

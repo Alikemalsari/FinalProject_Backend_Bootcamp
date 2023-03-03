@@ -1,0 +1,36 @@
+﻿@model List<List>
+
+<a class="btn btn-primary" asp-action="newList">Yeni Liste</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Liste Adı</th>
+            <th scope="col" style="width: 25%;"></th>
+           
+
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a asp-action="MyList" asp-route-id=@item.ListId>@item.ListName</a></td>
+                <td><a class='btn btn-danger' asp-action="DeleteList" asp-route-id="@item.ListId">Sil</a></td>
+
+                @if (item.IsActive == true)
+                {
+                    <td><a class='btn btn-primary' asp-action="ChangeIsActive" asp-route-id="@item.ListId">Alışverişe Çıkıyorum</a></td>
+                }
+                else{
+                    <td><a class='btn btn-danger' asp-action="ChangeIsActive" asp-route-id="@item.ListId">Alışveriş Tamamlandı</a></td>
+                }
+                
+                
+            </tr>
+        }
+
+
+    </tbody>
+</table>
